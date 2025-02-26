@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { Card, CardContent } from "./components/ui/card";
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
+import { Progress } from "./components/ui/progress";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function RestaurantLMSPrototype() {
+  const [progress, setProgress] = useState(25);
+  const [quizAnswer, setQuizAnswer] = useState("");
+  const [certificate, setCertificate] = useState(null);
+
+  const handleQuizSubmission = () => {
+    if (quizAnswer.toLowerCase() === "correct") {
+      setCertificate("Food Handling Certified");
+      setProgress(100);
+    } else {
+      alert("Incorrect answer, please try again.");
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="p-6 max-w-2xl mx-auto space-y-6">
+      <Card>
+        <CardContent className="p-4 space-y-4">
+          <h2 className="text-xl font-bold">Welcome to the Restaurant LMS</h2>
+          <p>Training Progress:</p>
+          <Progress value={progress} />
+        </CardContent>
+      </Card>
 
-export default App
+      <Card>
+        <CardContent className="p-4 space-y-4">
+          <h3 className="text-lg font-semibold">AI-Generated Training Video</h3>
+          <video controls className="w-full">
+            <source src="https://example.com/sample-training.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="p-4 space-y-4">
+          <h3 className="text-lg font-semibold">AI-Generated Quiz</h3>
+          <p>What is the correct food storage temperature?</p>
+          <Input
+            placeholder="Type your answer here..."
+            value={quizAnswer}
+            onChange={(e) => setQuizAnswer(e.target.value)}
+          />
+          <Button onClick={handleQuizSubmission}>Submit</Button>
+        </CardContent>
+      </Card>
+
+      {certificate && (
+        <Card>
+          <CardContent className="p-4 space-y-4">
+            <h3 className="text-lg font-semibold">Certification</h3>
+            <p>Congratulations! You are now {certificate}.</p>
+            <Button>Download Certificate</Button>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
