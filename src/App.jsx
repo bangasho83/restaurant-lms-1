@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Card, CardContent } from "./components/ui/card";
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
-import { Progress } from "./components/ui/progress";
+import { Card, CardContent } from "./components/ui/card.jsx";
+import { Button } from "./components/ui/button.jsx";
+import { Input } from "./components/ui/input.jsx";
+import { Progress } from "./components/ui/progress.jsx";
 
 export default function RestaurantLMSPrototype() {
   const [progress, setProgress] = useState(25);
@@ -19,44 +19,45 @@ export default function RestaurantLMSPrototype() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto space-y-6">
-      <Card>
-        <CardContent className="p-4 space-y-4">
-          <h2 className="text-xl font-bold">Welcome to the Restaurant LMS</h2>
-          <p>Training Progress:</p>
+    <div className="p-10 max-w-4xl mx-auto space-y-6 bg-gray-50 min-h-screen shadow-md rounded-xl">
+      <Card className="p-6 bg-white rounded-lg shadow">
+        <CardContent className="space-y-4">
+          <h2 className="text-2xl font-bold text-gray-900">Restaurant [LMS] Dashboard</h2>
+          <p className="text-gray-600">Training Progress:</p>
           <Progress value={progress} />
         </CardContent>
       </Card>
-
-      <Card>
-        <CardContent className="p-4 space-y-4">
-          <h3 className="text-lg font-semibold">AI-Generated Training Video</h3>
-          <video controls className="w-full">
+      
+      <Card className="p-6 bg-white rounded-lg shadow">
+        <CardContent className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">AI-Generated Training Video</h3>
+          <video controls className="w-full rounded-md shadow">
             <source src="https://example.com/sample-training.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </CardContent>
       </Card>
-
-      <Card>
-        <CardContent className="p-4 space-y-4">
-          <h3 className="text-lg font-semibold">AI-Generated Quiz</h3>
-          <p>What is the correct food storage temperature?</p>
-          <Input
-            placeholder="Type your answer here..."
-            value={quizAnswer}
-            onChange={(e) => setQuizAnswer(e.target.value)}
+      
+      <Card className="p-6 bg-white rounded-lg shadow">
+        <CardContent className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">AI-Generated Quiz</h3>
+          <p className="text-gray-700">What is the correct food storage temperature?</p>
+          <Input 
+            placeholder="Type your answer here..." 
+            value={quizAnswer} 
+            onChange={(e) => setQuizAnswer(e.target.value)} 
+            className="border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg"
           />
-          <Button onClick={handleQuizSubmission}>Submit</Button>
+          <Button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" onClick={handleQuizSubmission}>Submit</Button>
         </CardContent>
       </Card>
-
+      
       {certificate && (
-        <Card>
-          <CardContent className="p-4 space-y-4">
-            <h3 className="text-lg font-semibold">Certification</h3>
-            <p>Congratulations! You are now {certificate}.</p>
-            <Button>Download Certificate</Button>
+        <Card className="p-6 bg-white rounded-lg shadow">
+          <CardContent className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">Certification</h3>
+            <p className="text-gray-700">Congratulations! You are now {certificate}.</p>
+            <Button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Download Certificate</Button>
           </CardContent>
         </Card>
       )}
